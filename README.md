@@ -1,12 +1,6 @@
-# discord-fivem-browser
+# discord-crypto-prices-topic
 
-A FiveM helper bot for Discord. Shows player count in the channel title and delivers a list of players when requested.
-
-### Channel Title
-![Imgur](https://i.imgur.com/CivuAY9.png?1)
-
-### Server Browser
-![Imgur](https://i.imgur.com/InoMIPv.png)
+Shows chosen cryptocurrency prices in Discord's channel topics
 
 ### Quick start
 
@@ -24,8 +18,6 @@ node main.js
 I recommend using [Forever](https://github.com/foreverjs/forever) to run it, as the Discord.js crashes occasionally.
 ### Usage
 The bot automatically updates the topics in the channels set in the config.js
-
-To see the playerlist, type `![server name]`, for example `!server1`. This requires role(s) set in the config.js
 
 Feel free to add issues or better yet, do pull requests!
 
