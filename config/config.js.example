@@ -1,0 +1,26 @@
+module.exports.options = {
+    token: '',
+    topicChannels: [
+      ''
+    ],
+    api: 'https://api.kraken.com/0/public/Ticker?pair=',
+    pairs: [
+      { 
+        pair: 'BTCEUR',
+        realName: 'Bitcoin',
+      },
+      { 
+        pair: 'ETHEUR',
+        realName: 'Ethereum',
+      },
+      { 
+        pair: 'LTCEUR',
+        realName: 'Litecoin',
+      },
+      {
+        pair: 'XRPEUR',
+        realName: 'XRP'
+      }
+    ],
+    pollRate: 30,
+};
