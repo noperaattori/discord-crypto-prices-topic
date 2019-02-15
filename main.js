@@ -44,22 +44,26 @@ const updateTopic = async () => {
   for (const key in pairs.data.RAW) {
     let coin = pairs.data.RAW[key].EUR;
     let symbol = '';
+    let triangle = '▼';
     if (coin.CHANGE24HOUR > 0) {
       symbol = '+';
+      triangle = '▲';
     }
-    prices.push(`${coin.FROMSYMBOL}: ${coin.PRICE} (${symbol}${+(coin.CHANGEPCT24HOUR).toFixed(2)}%)`);
+    prices.push(`${coin.FROMSYMBOL}: ${coin.PRICE} (${symbol}${+(coin.CHANGEPCT24HOUR).toFixed(2)}% ${triangle})`);
   }
   
   const topic = prices.join(' | ');
   // Set topics for set channels
   for (const channel of options.topicChannels){
     try {
-      client.channels.find('name', channel).setTopic(topic);
+      console.log(topic);
+       // client.channels.find('name', channel).setTopic(topic);
     } catch(error){
       console.log(error);
     }
   }
 }
 
+updateTopic();
 // Log in
-client.login(options.token);
+// client.login(options.token);
