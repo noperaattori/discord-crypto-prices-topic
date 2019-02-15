@@ -1,6 +1,5 @@
 const axios = require('axios');
 const Discord = require('discord.js');
-// const _ = require('lodash');
 
 // Check if the config exists
 try {
@@ -28,22 +27,30 @@ const getPairs = async url => {
  */
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!\nIf this is your first time connecting, use https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=67176464&scope=bot to authorize your bot for your server.`);
+  updateTopic();
+  // Poll the servers every X seconds
+  client.setInterval(updateTopic, options.pollRate * 1000);
 });
 
 /**
- * Poll the servers every X seconds
+ * Update the topic
  */
-client.setInterval(async () => {
+const updateTopic = async () => {
   
   const prices = [];
-  for (const pair of options.pairs) {
-    let players = await getPairs(`${options.api}${pair.pair}`);
-    let price = Number(players.data.result[Object.keys(players.data.result)[0]].c[0]);
-    prices.push(`${pair.realName}: ${price.toFixed(3)}`);
-  };
-  const topic = prices.join(' | ');
-  console.log(topic);  
+
+  // Fetch every pair
+  let pairs = await getPairs(`${options.api}?api_key=${options.apiKey}&fsyms=${options.pairs.join(',')}&tsyms=EUR&e=kraken`);
+  for (const key in pairs.data.RAW) {
+    let coin = pairs.data.RAW[key].EUR;
+    let symbol = '';
+    if (coin.CHANGE24HOUR > 0) {
+      symbol = '+';
+    }
+    prices.push(`${coin.FROMSYMBOL}: ${coin.PRICE} (${symbol}${+(coin.CHANGEPCT24HOUR).toFixed(2)}%)`);
+  }
   
+  const topic = prices.join(' | ');
   // Set topics for set channels
   for (const channel of options.topicChannels){
     try {
@@ -52,7 +59,7 @@ client.setInterval(async () => {
       console.log(error);
     }
   }
-}, options.pollRate * 1000);
+}
 
 // Log in
 client.login(options.token);
