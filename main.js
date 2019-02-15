@@ -56,8 +56,7 @@ const updateTopic = async () => {
   // Set topics for set channels
   for (const channel of options.topicChannels){
     try {
-      console.log(topic);
-       // client.channels.find('name', channel).setTopic(topic);
+      client.channels.find('name', channel).setTopic(topic);
     } catch(error){
       console.log(error);
     }
@@ -66,4 +65,4 @@ const updateTopic = async () => {
 
 updateTopic();
 // Log in
-// client.login(options.token);
+client.login(options.token);
