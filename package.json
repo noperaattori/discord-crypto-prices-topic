@@ -1,13 +1,12 @@
 {
-  "name": "DiscordFiveMBrowser",
+  "name": "Discord Crypto Prices Topic",
   "version": "0.0.2",
   "description": "",
   "main": "main.js",
   "dependencies": {
     "axios": "^0.17.1",
     "discord.js": "^11.3.2",
-    "get-json": "^1.0.0",
-    "lodash": "^4.17.10"
+    "get-json": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {

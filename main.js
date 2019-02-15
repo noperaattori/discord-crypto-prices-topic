@@ -1,6 +1,5 @@
 const axios = require('axios');
 const Discord = require('discord.js');
-// const _ = require('lodash');
 
 // Check if the config exists
 try {
@@ -36,13 +35,15 @@ client.on('ready', () => {
 client.setInterval(async () => {
   
   const prices = [];
+
+  // Fetch every pair
   for (const pair of options.pairs) {
-    let players = await getPairs(`${options.api}${pair.pair}`);
-    let price = Number(players.data.result[Object.keys(players.data.result)[0]].c[0]);
+    let pairs = await getPairs(`${options.api}${pair.pair}`);
+    let price = Number(pairs.data.result[Object.keys(pairs.data.result)[0]].c[0]);
     prices.push(`${pair.realName}: ${price.toFixed(3)}`);
   };
+  
   const topic = prices.join(' | ');
-  console.log(topic);  
   
   // Set topics for set channels
   for (const channel of options.topicChannels){
