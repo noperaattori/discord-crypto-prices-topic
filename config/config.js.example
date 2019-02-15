@@ -1,26 +1,18 @@
 module.exports.options = {
     token: '',
+    apiKey: '',
     topicChannels: [
-      ''
+      'kryptovaluutat'
     ],
-    api: 'https://api.kraken.com/0/public/Ticker?pair=',
+    api: 'https://min-api.cryptocompare.com/data/pricemultifull',
     pairs: [
-      { 
-        pair: 'BTCEUR',
-        realName: 'Bitcoin',
-      },
-      { 
-        pair: 'ETHEUR',
-        realName: 'Ethereum',
-      },
-      { 
-        pair: 'LTCEUR',
-        realName: 'Litecoin',
-      },
-      {
-        pair: 'XRPEUR',
-        realName: 'XRP'
-      }
+      'BTC',
+      'ETH',
+      'LTC',
+      'XRP',
+      'DASH',
     ],
-    pollRate: 30,
+    exchange: 'Kraken',
+    currency: 'EUR',
+    pollRate: 60,
 };
