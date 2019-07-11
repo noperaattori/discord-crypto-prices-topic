@@ -56,13 +56,12 @@ const updateTopic = async () => {
   // Set topics for set channels
   for (const channel of options.topicChannels){
     try {
-      client.channels.find('name', channel).setTopic(topic);
+      await client.channels.find('name', channel).setTopic(topic);
     } catch(error){
       console.log(error);
     }
   }
 }
 
-updateTopic();
 // Log in
 client.login(options.token);
