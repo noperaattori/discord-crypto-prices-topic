@@ -22,6 +22,14 @@ const getPairs = async url => {
   }
 };
 
+const getFee = async url => {
+  try {
+    return axios.get('https://bitcoinfees.earn.com/api/v1/fees/recommended', { responseType: 'json', timeout: 10000 });
+  } catch(e) {
+    console.log(e);
+  }
+}
+
 /**
  * Connect to Discord
  */
@@ -52,7 +60,11 @@ const updateTopic = async () => {
     prices.push(`${coin.FROMSYMBOL}: ${coin.PRICE} (${symbol}${+(coin.CHANGEPCT24HOUR).toFixed(2)}% ${triangle})`);
   }
   
-  const topic = prices.join(' | ');
+  let fees = await getFee();
+  let satPerByte = fees.data.hourFee;
+  let feeInEuros = (satPerByte * 226) / 100000000 * pairs.data.RAW.BTC.EUR.PRICE;
+
+  const topic = prices.join(' | ') + ` | 1h fee: ${satPerByte} sat/byte (~ ${feeInEuros.toFixed(2)} eur/tx)`;
   // Set topics for set channels
   for (const channel of options.topicChannels){
     try {
