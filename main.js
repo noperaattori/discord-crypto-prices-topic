@@ -64,7 +64,7 @@ const updateTopic = async () => {
   let satPerByte = fees.data.hourFee;
   let feeInEuros = (satPerByte * 226) / 100000000 * pairs.data.RAW.BTC.EUR.PRICE;
 
-  const topic = prices.join(' | ') + ` - 1h fee: ${satPerByte} sat/byte (${feeInEuros.toFixed(2)} eur/tx)`;
+  const topic = prices.join(' | ') + ` 1h fee: ${satPerByte} sat/byte (${feeInEuros.toFixed(2)} eur/tx)`;
   // Set topics for set channels
   for (const channel of options.topicChannels){
     try {
